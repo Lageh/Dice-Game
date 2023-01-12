@@ -86,6 +86,7 @@ btnHold.addEventListener('click', function () {
     document
       .querySelector(`.player--${activePlayer}`)
       .classList.add('player--winner');
+    document.querySelector(`name--${activePlayer}`).textContent += ' - Winner';
     diceEl.classList.add('hidden');
     playing = false;
   } else {
