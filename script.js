@@ -11,6 +11,11 @@ const current0El = document.querySelector('#current--0');
 const current1El = document.querySelector('#current--1');
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
+const btnInst = document.querySelector('.btn--instruction');
+const modal = document.querySelector('.modal');
+const overlay = document.querySelector('.overlay');
+const btnCloseModal = document.querySelector('.close-modal');
+const btnsOpenModal = document.querySelectorAll('.show-modal');
 //starting condition
 
 let currentScore = 0;
@@ -108,3 +113,31 @@ btnHold.addEventListener('click', function () {
 });
 
 btnNew.addEventListener('click', startUp);
+
+const openModal = function () {
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+  overlay.style.zIndex = '6';
+};
+
+const closeModal = function () {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+  overlay.style.zIndex = '4';
+};
+
+for (let i = 0; i < btnsOpenModal.length; i++)
+  btnsOpenModal[i].addEventListener('click', openModal);
+
+btnCloseModal.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', function (e) {
+  // console.log(e.key);
+
+  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal();
+  }
+});
+
+btnInst.addEventListener('click', openModal);
