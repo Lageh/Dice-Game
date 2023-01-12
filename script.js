@@ -23,8 +23,13 @@ const startUp = function () {
   diceEl.classList.add('hidden');
 
   if (activePlayer == 1) {
-    player0El.classList.toggle('player--active');
-    player1El.classList.toggle('player--active');
+    player0El.classList.add('player--active');
+    player1El.classList.remove('player--active');
+    player1El.classList.remove('player--winner');
+  } else {
+    player1El.classList.add('player--active');
+    player0El.classList.remove('player--active');
+    player0El.classList.remove('player--winner');
   }
   currentScore = 0;
   activePlayer = 0;
@@ -32,6 +37,7 @@ const startUp = function () {
 
   score0El.textContent = score1El.textContent = 0;
   current0El.textContent = current1El.textContent = 0;
+  playing = true;
 };
 
 // Dice roll
