@@ -31,6 +31,9 @@ const startUp = function () {
     player0El.classList.remove('player--active');
     player0El.classList.remove('player--winner');
   }
+  if (!playing) {
+    document.querySelector(`.winner--${activePlayer}`).classList.add('hidden');
+  }
   currentScore = 0;
   activePlayer = 0;
   finalScores = [0, 0];
@@ -85,22 +88,22 @@ btnHold.addEventListener('click', function () {
     currentScore = 0;
     document.getElementById(`current--${activePlayer}`).textContent =
       currentScore;
-    if (finalScores[activePlayer] >= 20) {
-      console.log(activePlayer);
-      document
-        .querySelector(`.player--${activePlayer}`)
-        .classList.remove('player--active');
-      document
-        .querySelector(`.player--${activePlayer}`)
-        .classList.add('player--winner');
-      document.querySelector(`#name--${activePlayer}`).textContent += ' Winner';
-      document.querySelector(`#name--${activePlayer}`).style.textAlign =
-        'center';
-      diceEl.classList.add('hidden');
-      playing = false;
-    } else {
-      swtichPlayer();
-    }
+  }
+  if (finalScores[activePlayer] >= 20) {
+    playing = false;
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.remove('player--active');
+    document
+      .querySelector(`.player--${activePlayer}`)
+      .classList.add('player--winner');
+    document.querySelector(`#name--${activePlayer}`).style.textAlign = 'center';
+    document
+      .querySelector(`.winner--${activePlayer}`)
+      .classList.remove('hidden');
+    diceEl.classList.add('hidden');
+  } else {
+    swtichPlayer();
   }
 });
 
