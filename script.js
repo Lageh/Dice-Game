@@ -72,25 +72,29 @@ btnRoll.addEventListener('click', function () {
 });
 
 btnHold.addEventListener('click', function () {
-  finalScores[activePlayer] += currentScore;
-  document.getElementById(`score--${activePlayer}`).textContent =
-    finalScores[activePlayer];
-  currentScore = 0;
-  document.getElementById(`current--${activePlayer}`).textContent =
-    currentScore;
-  if (finalScores[activePlayer] >= 100) {
-    console.log(activePlayer);
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.remove('player--active');
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.add('player--winner');
-    document.querySelector(`name--${activePlayer}`).textContent += ' - Winner';
-    diceEl.classList.add('hidden');
-    playing = false;
-  } else {
-    swtichPlayer();
+  if (playing) {
+    finalScores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      finalScores[activePlayer];
+    currentScore = 0;
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentScore;
+    if (finalScores[activePlayer] >= 20) {
+      console.log(activePlayer);
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document.querySelector(`#name--${activePlayer}`).textContent += ' Winner';
+      document.querySelector(`#name--${activePlayer}`).style.textAlign =
+        'center';
+      diceEl.classList.add('hidden');
+      playing = false;
+    } else {
+      swtichPlayer();
+    }
   }
 });
 
